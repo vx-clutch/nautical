@@ -1,5 +1,5 @@
 package compiler
 
-func Compiler(file []byte) string {
-	return "Really cool program"
+func Compiler(file []byte) []byte {
+	return []byte{12}
 }

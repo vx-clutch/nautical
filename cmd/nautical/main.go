@@ -1,11 +1,16 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"nautical/pkg/compiler"
 	"os"
 	"strings"
 )
+
+func init() {
+
+}
 
 func main() {
 	commandChecks()
@@ -16,7 +21,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	compiler.Compiler(content)
+	program := compiler.Compiler(content)
+	err = os.WriteFile(defaultPath, program, 0666)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func commandChecks() {
@@ -25,5 +34,6 @@ func commandChecks() {
 	} // Checks for arguments
 	if strings.HasSuffix(os.Args[1], ".hm") {
 		fmt.Println("error: invalid file extention\n\tcorrent usage: <filename>.nm")
-	} // Checks for proper file extention
+		os.Exit(1)
+	} // Checks for proper file extentions
 }
