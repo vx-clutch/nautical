@@ -1,5 +1,5 @@
 package compiler
 
 func Compiler(file []byte) []byte {
-	return []byte{12}
+	return []byte{24}
 }
