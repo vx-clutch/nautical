@@ -8,12 +8,21 @@ import (
 	"strings"
 )
 
-func init() {
-
-}
-
 func main() {
-	commandChecks()
+	if len(os.Args) < 2 {
+		os.Exit(1)
+	}
+	if strings.HasSuffix(os.Args[1], ".hm") {
+		fmt.Println("error: invalid file extention\n\tcorrent usage: <filename>.nm")
+		os.Exit(1)
+	}
+	outputFilePath := flag.String("o", "", "Specify the output file path")
+	flag.Parse()
+	if *outputFilePath != "" {
+		path := outputFilePath
+	} else {
+		path := outputFilePath
+	}
 	filename := os.Args[1]
 	defaultPath := strings.TrimSuffix(filename, ".nm")
 	fmt.Println(defaultPath)
@@ -22,18 +31,8 @@ func main() {
 		panic(err)
 	}
 	program := compiler.Compiler(content)
-	err = os.WriteFile(defaultPath, program, 0666)
+	err = os.WriteFile(path, program, 0666)
 	if err != nil {
 		panic(err)
 	}
-}
-
-func commandChecks() {
-	if len(os.Args) < 2 {
-		os.Exit(1)
-	} // Checks for arguments
-	if strings.HasSuffix(os.Args[1], ".hm") {
-		fmt.Println("error: invalid file extention\n\tcorrent usage: <filename>.nm")
-		os.Exit(1)
-	} // Checks for proper file extentions
 }
