@@ -1,34 +1,37 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"nautical/pkg/compiler"
 	"os"
 	"strings"
 )
 
-func main() {
+func init() {
 	if len(os.Args) < 2 {
+		fmt.Println("error: not enogh arguments\n\tcorrect usage: knot <filename>.nm")
 		os.Exit(1)
 	}
 	if strings.HasSuffix(os.Args[1], ".hm") {
-		fmt.Println("error: invalid file extention\n\tcorrent usage: <filename>.nm")
+		fmt.Println("error: invalid file extention\n\tcorrect usage: <filename>.nm")
 		os.Exit(1)
 	}
-	outputFilePath := flag.String("o", "", "Specify the output file path")
-	flag.Parse()
-	if *outputFilePath != "" {
-		path := outputFilePath
-	} else {
-		path := outputFilePath
-	}
+}
+
+func main() {
 	filename := os.Args[1]
-	defaultPath := strings.TrimSuffix(filename, ".nm")
-	fmt.Println(defaultPath)
+	path := strings.TrimSuffix(filename, ".nm")
 	content, err := os.ReadFile(filename)
 	if err != nil {
 		panic(err)
+	}
+	if len(os.Args) > 2 {
+		if os.Args[2] == "-o" {
+			path = os.Args[3]
+		}
+	} else {
+		fmt.Println("error: no argument after output flag\n\tcorrect usage: -o <output>")
+		os.Exit(1)
 	}
 	program := compiler.Compiler(content)
 	err = os.WriteFile(path, program, 0666)
