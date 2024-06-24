@@ -1,10 +1,11 @@
 package create
 
-import "os"
+import (
+	"os"
+	"path/filepath"
+)
 
 func Create(name string) {
-	os.Mkdir(name, 0666)
-	os.Chdir(name)
-	os.Mkdir("src", 0666)
-	os.WriteFile("src/main.nm", []byte("fn main() => int {\n\treturn 0\n}"), 0666)
+	os.MkdirAll(filepath.Join(name, "src"), 0666)
+	os.WriteFile(filepath.Join(name, "src", name+".nm"), []byte("fn main() => int {\n\treturn 0\n}"), 0666)
 }
