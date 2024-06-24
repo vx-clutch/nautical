@@ -2,40 +2,29 @@ package main
 
 import (
 	"fmt"
-	"nautical/pkg/compiler"
+	"nautical/pkg/create"
 	"os"
-	"strings"
 )
 
-func init() {
-	if len(os.Args) < 2 {
-		fmt.Println("error: not enogh arguments\n\tcorrect usage: knot <filename>.nm")
-		os.Exit(1)
+func main() {
+	if len(os.Args) == 1 {
+		help()
 	}
-	if strings.HasSuffix(os.Args[1], ".hm") {
-		fmt.Println("error: invalid file extention\n\tcorrect usage: <filename>.nm")
-		os.Exit(1)
+	if os.Args[1] == "build" {
+		build()
+	}
+	if os.Args[1] == "new" {
+		project()
 	}
 }
 
-func main() {
-	filename := os.Args[1]
-	path := strings.TrimSuffix(filename, ".nm")
-	content, err := os.ReadFile(filename)
-	if err != nil {
-		panic(err)
-	}
-	if len(os.Args) > 2 {
-		if os.Args[2] == "-o" {
-			path = os.Args[3]
-		}
-	} else {
-		fmt.Println("error: no argument after output flag\n\tcorrect usage: -o <output>")
-		os.Exit(1)
-	}
-	program := compiler.Compiler(content)
-	err = os.WriteFile(path, program, 0666)
-	if err != nil {
-		panic(err)
-	}
+func help() {
+	fmt.Println("help")
+	os.Exit(0)
+}
+func build() {
+	fmt.Println("build")
+}
+func project() {
+	create.Create(os.Args[2])
 }
