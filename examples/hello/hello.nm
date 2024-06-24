@@ -1,5 +1,0 @@
-@std::fmt
-
-fn main() => void {
-	fmt.Println("Hello, World!")
-}
