@@ -1,9 +1,11 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"nautical/pkg/create"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -23,7 +25,9 @@ func help() {
 	os.Exit(0)
 }
 func build() {
-	fmt.Println("build")
+	filename := os.Args[3]
+	oFlag := flag.String("o", strings.TrimSuffix(filename, ".nm"), "Specify output location")
+	fmt.Println(oFlag)
 }
 func project() {
 	create.Create(os.Args[2])
