@@ -13,8 +13,11 @@ run:
 	./${BIN_NAME}
 
 install:
-	go build -o /usr/bin/knot ./...
+	go build -o ./usr/bin/knot ./...
 
 clean:
 	go clean
 	rm ${BIN_NAME}
+
+compile:
+	go build -o ./bin/knot ./...
