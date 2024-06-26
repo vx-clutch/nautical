@@ -1,7 +1,7 @@
 BIN_NAME=knot
 MAIN=cmd/nautical/main.go
 
-all: build test
+all: build
 
 build:
 	go build -o ${BIN_NAME} ${MAIN}
