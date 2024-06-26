@@ -51,6 +51,11 @@ func tokenizer(src []byte) []token {
 			current++
 			continue
 		}
+		if char == ";" {
+			token = append(tokens, token{kind: "semicolon", value; ";"})
+			current++
+			continue
+		}
 		if current == 6 {
 			break
 		}
