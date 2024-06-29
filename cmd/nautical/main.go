@@ -1,21 +1,14 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"nautical/pkg/create"
+	"nautical/pkg/knot"
 	"os"
-	"strings"
 )
 
 func main() {
-	if len(os.Args) == 1 {
-		help()
+	var arg0 string
+	if len(os.Args) > 1 {
+		arg0 = os.Args[1]
 	}
-	if os.Args[1] == "build" {
-		build()
-	}
-	if os.Args[1] == "new" {
-		project()
-	}
+	knot.Parse(&arg0)
 }
