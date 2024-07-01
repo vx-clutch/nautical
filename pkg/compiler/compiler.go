@@ -7,7 +7,7 @@ type token struct {
 	value string
 }
 
-func Compiler(file []byte) (program []byte) {
+func Compile(file []byte) (program []byte) {
 	tokens := tokenizer(file)
 	program = codeGeneration(tokens)
 	return
@@ -52,10 +52,11 @@ func tokenizer(src []byte) []token {
 			continue
 		}
 		if char == ";" {
-			token = append(tokens, token{kind: "semicolon", value; ";"})
+			tokens = append(tokens, token{kind: "semicolon", value: ";"})
 			current++
 			continue
 		}
+		// FIX: don't ask, i do not know
 		if current == 6 {
 			break
 		}
@@ -63,8 +64,14 @@ func tokenizer(src []byte) []token {
 	return tokens
 }
 
-func codeGeneration(tokens []token) []byte {
+// TODO:
+func isAlpha()  {}
+func isNumber() {}
+
+func codeGeneration(ir []token) []byte {
+	base := "global _start\n_start:\n\t"
 	program := "assembly fr fr"
-	fmt.Println(tokens)
+	fmt.Println(ir)
+	program = base + program
 	return []byte(program)
 }

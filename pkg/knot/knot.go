@@ -10,11 +10,13 @@ import (
 )
 
 func help() {
+	// TODO: Add help info
 	fmt.Println("help")
 	os.Exit(0)
 }
 
 func build() {
+	// WARN: Not sure about edge cases
 	if has(3) {
 		compiler_errors.Arguments()
 		os.Exit(0)
@@ -39,13 +41,6 @@ func has(num int) bool {
 		return false
 	}
 	return true
-}
-
-func is(num int) bool {
-	if len(os.Args) == num {
-		return true
-	}
-	return false
 }
 
 func Parse(pOption *string) {

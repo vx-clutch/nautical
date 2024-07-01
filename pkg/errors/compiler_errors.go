@@ -14,3 +14,8 @@ func Arguments() {
 	errPrint("Not enough arguments", "knot <sub-command> <arg0> <arg...>")
 	os.Exit(0)
 }
+
+func Custom(err string, correct string) {
+	errPrint(err, correct)
+	os.Exit(0)
+}
